@@ -17,12 +17,26 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/about-us', function () {
+    return Inertia::render('About');
+})->name('about_us');
+
+Route::get('/contact-us', function () {
+    return Inertia::render('ContactUs');
+})->name('contact_us');
+
+Route::get('/privacy', function () {
+    return Inertia::render('Privacy');
+})->name('privacy');
+
+Route::get('/terms', function () {
+    return Inertia::render('Terms');
+})->name('terms');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
