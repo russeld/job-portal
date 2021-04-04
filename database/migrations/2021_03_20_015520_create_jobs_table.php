@@ -20,9 +20,12 @@ class CreateJobsTable extends Migration
             $table->string('slug', 200);
             $table->string('min_salary')->nullable();
             $table->string('max_salary')->nullable();
-            $table->datetime('start_date');
-            $table->datetime('end_date');
-            $table->integer('opening');
+            $table->integer('duration')->nullable();
+            $table->integer('type')->nullable();
+            $table->datetime('start_date')->nullable();
+            $table->datetime('end_date')->nullable();
+            $table->integer('opening')->nullable();
+            $table->integer('status');
             $table->string('banner')->nullable();
 
             $table->foreignId('industry_id');

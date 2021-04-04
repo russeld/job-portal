@@ -26,6 +26,8 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
+        "moment": "^2.29.1",
+        "vue-moment": "^4.1.0",
         "vue-tailwind": "^2.1.3"
     }
 }

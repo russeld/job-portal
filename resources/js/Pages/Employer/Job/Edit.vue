@@ -1,9 +1,12 @@
 <template>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="my-10">
-            <p class="my-10 text-5xl font-bold text-blue-700">New Job Listing</p>
             <div class="max-w-6xl">
+                <div class="my-10 flex items-center justify-between w-full lg:w-1/2">
+                    <span class="text-5xl font-bold text-blue-700">{{ job.title }}</span>
+                </div>
                 <breeze-validation-errors class="mb-4" />
+                {{ errors }}
                 <form @submit.prevent="submit" class="space-y-md">
                     <div>
                         <breeze-label for="title" value="Job Title" />
@@ -16,7 +19,7 @@
                             id="industry"
                             v-model="form.industry_id"
                             required
-                            class="appearance-none mt-1 block md:w-1/2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            class="appearance-none mt-1 block w-full lg:w-1/2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option v-for="(industry, id) in industries" :key="id" :value="industry.id">{{industry.name}}</option>
                         </select>
                     </div>
@@ -112,29 +115,22 @@ export default {
         BreezeValidationErrors
     },
     props: {
+        job: {
+            type: Object,
+            required: true
+        },
         types: Array,
         industries: Array,
         durations: Array
     },
     data() {
         return {
-            form: this.$inertia.form({
-                title: '',
-                max_salary: '',
-                min_salary: '',
-                description: '',
-                type: '',
-                industry_id: '',
-                start_date: '',
-                duration: '',
-                opening: '',
-                status: ''
-            })
+            form: this.$inertia.form({...this.job})
         }
     },
     methods: {
         submit() {
-            this.form.post(this.route('employer_job_create'), {
+            this.form.put(this.route('employer_job_edit', [this.job.id]), {
                 onFinish: () => console.log('updated'),
             })
         }

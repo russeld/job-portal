@@ -20,7 +20,7 @@ class CreateCompaniesTable extends Migration
             $table->string('logo', 200)->nullable();
             $table->text('about')->nullable();
             $table->integer('noe')->nullable();
-            $table->foreignId('industry_id');
+            $table->foreignId('industry_id')->nullable();
             $table->timestamps();
         });
     }

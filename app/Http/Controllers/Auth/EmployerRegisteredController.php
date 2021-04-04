@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -50,7 +51,11 @@ class EmployerRegisteredController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
+            $company = Company::create(['name' => $request->company_name]);
+
+            $user->company()->associate($company);
             $user->assignRole('employer');
+            $user->save();
 
             DB::commit();
 
@@ -58,6 +63,7 @@ class EmployerRegisteredController extends Controller
 
             event(new Registered($user));
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
         }
 

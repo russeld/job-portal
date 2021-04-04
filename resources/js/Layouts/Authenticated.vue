@@ -18,6 +18,9 @@
                                 <breeze-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </breeze-nav-link>
+                                <breeze-nav-link :href="route('employer_job_index')" :active="route().current('employer_job_index')">
+                                    Listings
+                                </breeze-nav-link>
                             </div>
                         </div>
 
